@@ -1,0 +1,23 @@
+services:
+  asir_bind9:
+    container_name: asir_bind9
+    # Nombre que recibirá el contenedor
+    image: ubuntu/bind9
+    # Imagen utilizada. Se utiliza la de Ubuntu para ver los logs
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    # Asignación de los puertos
+    networks:
+      bind916_subnet:
+        ipv4_address: 172.50.5.10
+    # Asignación de IP fija y la red en la que se trabajará
+    volumes:
+      - ./conf:/etc/bind
+      - ./lib:/var/lib/bind
+    # Uso de los volúmenes siguiendo la guía encontrada en "DockerHUB"
+networks:
+  bind916_subnet:
+    external: true
+  # Indicar que la red utilzada es externa
+
